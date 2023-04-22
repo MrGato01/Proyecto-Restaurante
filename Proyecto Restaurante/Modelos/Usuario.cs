@@ -9,13 +9,13 @@ namespace Modelos
 {
     public class Usuario
     {
-        [Required(ErrorMessage = "El código es requerido")]
+        [Required(ErrorMessage = "El código es necesario")]
         public string CodigoUsuario { get; set; }
-        [Required(ErrorMessage = "El nombre es requerido")]
+        [Required(ErrorMessage = "El nombre es necesario")]
         public string Nombre { get; set; }
         public string Contrasena { get; set; }
         public string Correo { get; set; }
-        [Required(ErrorMessage = "El rol es requerido")]
+        [Required(ErrorMessage = "El rol es necesario")]
         public string Rol { get; set; }
         public byte[] Foto { get; set; }
         public DateTime FechaCreacion { get; set; }

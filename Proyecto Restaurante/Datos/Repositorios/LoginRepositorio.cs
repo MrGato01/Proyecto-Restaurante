@@ -23,9 +23,23 @@ namespace Datos.Repositorios
             return new MySqlConnection( CadenaConexion);
         }
 
-        public Task<bool> ValidarUsuario(Login login)
+        public async Task<bool> ValidarUsuario(Login login)
         {
-            throw new NotImplementedException();
+            bool valido = false;
+            try
+            {
+                using MySqlConnection _conexion = Conexion();
+                await _conexion.OpenAsync();
+                
+                    
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
+
     }
 }
+
