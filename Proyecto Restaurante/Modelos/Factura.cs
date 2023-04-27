@@ -10,10 +10,13 @@ namespace Modelos
     {
         public DateTime Fecha { get; set; }
         public int NumFactura { get; set; }
+        public string CodUsuario { get; set; }
         public string Cliente { get; set; }
         public string IdCliente { get; set; }
         public decimal  SubTotal { get; set; }
         public decimal Descuento { get; set; }
         public decimal ISV { get; set; }
+        public decimal Total { get; set; }
+
     }
 }
