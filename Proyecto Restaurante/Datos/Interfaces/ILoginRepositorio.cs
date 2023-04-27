@@ -9,6 +9,6 @@ namespace Datos.Interfaces
 {
     public interface ILoginRepositorio
     {
-        Task<bool> ValidarUsuario(Login login);
+        Task<bool> ValidarUsuarioAsync(Login login);
     }
 }
