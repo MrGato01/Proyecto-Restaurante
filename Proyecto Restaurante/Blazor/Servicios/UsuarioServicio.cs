@@ -1,5 +1,4 @@
 ﻿using Blazor.Interfaces;
-using Blazor.Pages.MisUsuarios;
 using Datos.Interfaces;
 using Datos.Repositorios;
 using Modelos;
@@ -22,7 +21,7 @@ namespace Blazor.Servicios
             return await usuarioRepositorio.ActualizarAsync(usuario);
         }
 
-        public async Task<bool> EliminarAsync(Usuario codigo)
+        public async Task<bool> EliminarAsync(string codigo)
         {
             return await usuarioRepositorio.EliminarAsync(codigo);
         }

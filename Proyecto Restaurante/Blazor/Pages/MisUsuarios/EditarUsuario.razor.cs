@@ -1,5 +1,4 @@
 ﻿using Blazor.Interfaces;
-using Blazor.Servicios;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -10,8 +9,9 @@ namespace Blazor.Pages.MisUsuarios
     public partial class EditarUsuario
     {
         [Inject] private IUsuarioServicio usuarioServicio { get; set; }
-        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager navigationManager { get; set; }
         [Inject] private SweetAlertService Swal { get; set; }
+
         private Usuario user = new Usuario();
         [Parameter] public string CodigoUsuario { get; set; }
         string imgUrl = string.Empty;
@@ -48,7 +48,7 @@ namespace Blazor.Pages.MisUsuarios
 
             if (edito)
             {
-                await Swal.FireAsync("Felicidades", "Usuario Actualizado", SweetAlertIcon.Success);
+                await Swal.FireAsync("Felicidades", "Usuario se actualizo correctamente", SweetAlertIcon.Success);
             }
             else
             {
@@ -58,13 +58,13 @@ namespace Blazor.Pages.MisUsuarios
 
         protected async void Cancelar()
         {
-            NavigationManager.NavigateTo("/Usuarios");
+            navigationManager.NavigateTo("/Usuarios");
         }
         protected async void Eliminar()
         {
             SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
             {
-                Title = "¿Seguro que desea eliminar el usuario?",
+                Title = "¿Estas Seguro que deseas eliminar el usuario?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true,
                 ConfirmButtonText = "Aceptar",
@@ -77,8 +77,8 @@ namespace Blazor.Pages.MisUsuarios
 
                 if (elimino)
                 {
-                    await Swal.FireAsync("Felicidades", "Usuario eliminado", SweetAlertIcon.Success);
-                    NavigationManager.NavigateTo("/Usuarios");
+                    await Swal.FireAsync("Felicidades", "Usuario eliminado correctamente", SweetAlertIcon.Success);
+                    navigationManager.NavigateTo("/Usuarios");
                 }
                 else
                 {

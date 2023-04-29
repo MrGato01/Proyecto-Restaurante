@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Modelos
 {
@@ -13,6 +8,7 @@ namespace Modelos
         public string CodigoUsuario { get; set; }
         [Required(ErrorMessage = "El nombre es necesario")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "La contraseña es necesaria")]
         public string Contrasena { get; set; }
         public string Correo { get; set; }
         [Required(ErrorMessage = "El rol es necesario")]
