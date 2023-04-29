@@ -23,5 +23,18 @@ namespace Modelos
 
         public int Cantidad { get; set; }
 
+        public Productos()
+        {
+        }
+
+        public Productos(string codigoMenu, string nombre, string descripcion, decimal precio, string categoria, int cantidad)
+        {
+            CodigoMenu = codigoMenu;
+            Nombre = nombre;
+            Descripcion = descripcion;
+            Precio = precio;
+            Categoria = categoria;
+            Cantidad = cantidad;
+        }
     }
 }
