@@ -14,13 +14,11 @@ namespace Blazor.Controllers
       private ILoginRepositorio _loginRepositorio;
       private IUsuarioRepositorio _usuarioRepositorio;
 
-      public LoginController (Config config)
+        public LoginController(Config config)
         {
-
             _config = config;
             _loginRepositorio = new LoginRepositorio(config.CadenaConexion);
             _usuarioRepositorio = new UsuarioRepositorio(config.CadenaConexion);
-
         }
 
         [HttpPost("/autenticar/validar")]
@@ -53,13 +51,13 @@ namespace Blazor.Controllers
                     }
                     else
                     {
-                        return LocalRedirect("/Login/Error. El usuario con el que tratas de iniciar sesion no se encuentra activo! :( ¡Ponte en contacto con un administrador!"); 
+                        return LocalRedirect("/Login/El usuario con el que tratas de iniciar sesion no se encuentra activo! :( ¡Ponte en contacto con un administrador!"); 
                     }
                 }
 
                 else
                 {
-                    return LocalRedirect("/Login/Error. Los datos de usuario ingresados son incorrectos, ¿Quizas, Has escrito mal la contraseña?. Verifíca los datos nuevamente! :)");
+                    return LocalRedirect("/Login/Los datos de usuario son incorrectos :(");
                 }
             }
             catch (Exception)
@@ -73,7 +71,7 @@ namespace Blazor.Controllers
         public async Task<IActionResult> CerrarSesion()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return LocalRedirect("/login");
+            return LocalRedirect("/Login");
         }
     }
 }
