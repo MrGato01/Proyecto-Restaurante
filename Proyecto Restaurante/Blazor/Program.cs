@@ -1,6 +1,7 @@
 using Blazor;
 using Blazor.Interfaces;
 using Blazor.Servicios;
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,13 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-Config cadena = new Config(builder.Configuration.GetConnectionString("MySQL"));
+Config cadena = new Config(builder.Configuration.GetConnectionString("MySQL")); 
 builder.Services.AddSingleton(cadena);
 
 builder .Services.AddScoped<ILoginServicio, LoginServicio>();
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSweetAlert2();
 
 var app = builder.Build();
 
