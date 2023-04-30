@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Datos.Repositorios
 {
-    public class ProductosRepositorio : IMenuRepositorio
+    public class MenuRepositorio : IMenuRepositorio
     {
         private string CadenaConexion;
 
-        public ProductosRepositorio(string _cadenaConexion)
+        public MenuRepositorio(string _cadenaConexion)
         {
             CadenaConexion = _cadenaConexion;
         }
@@ -23,8 +23,6 @@ namespace Datos.Repositorios
         {
             return new MySqlConnection(CadenaConexion);
         }
-
-
 
 
         public async Task<bool> Actualizar(Menu Menu)
@@ -89,7 +87,7 @@ namespace Datos.Repositorios
                 string sql = "SELECT * FROM Menu WHERE CodigoMenu =@CodigoMenu";
                 Menu = await conexion.QueryFirstAsync<Menu>(sql, new { CodigoMenu });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             return Menu;
@@ -106,13 +104,10 @@ namespace Datos.Repositorios
                 string sql = "INSERT INTO Menu (CodigoMenu,  Nombre,  Descripcion,  Precio, Categoria, Cantidad) VALUES(@CodigoMenu, @Nombre, @Descripcion, @Precio, @Categoria, @Cantidad)";
                 resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, Menu));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             return resultado;
         }
-
-
     }
 }
-

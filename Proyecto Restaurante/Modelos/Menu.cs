@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modelos
 {
-    public class Productos
+    public class Menu
     {
         [Required(ErrorMessage = "El código es obligatorio")]
         public string CodigoMenu { get; set; }
@@ -22,10 +22,7 @@ namespace Modelos
         [Required(ErrorMessage = "La categoria es obligatoria")]
         public string Categoria { get; set; }
 
-
         [Required(ErrorMessage = "La Cantidad es obligatorio")]
-
         public int Cantidad { get; set; }
-
     }
 }
