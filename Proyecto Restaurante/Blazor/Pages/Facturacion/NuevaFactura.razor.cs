@@ -41,7 +41,7 @@ namespace Blazor.Pages.Facturacion
                 {
                     DetalleFactura detalle = new DetalleFactura();
                     detalle.Descripcion = producto.Descripcion;
-                    detalle.CodigoProducto = producto.Codigo;
+                    detalle.CodigoProducto = producto.CodigoProducto;
                     detalle.Cantidad = Convert.ToInt32(cantidad);
                     detalle.Precio = producto.Precio;
                     detalle.Total = producto.Precio * Convert.ToInt32(cantidad);

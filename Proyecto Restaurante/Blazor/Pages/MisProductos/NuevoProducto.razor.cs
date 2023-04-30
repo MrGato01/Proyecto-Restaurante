@@ -6,7 +6,7 @@ using Modelos;
 
 namespace Blazor.Pages.MisProductos
 {
-    public partial class EditarProducto
+    public partial class NuevoProducto
     {
         [Inject] private IProductoServicio productoServicio { get; set; }
         [Inject] private NavigationManager navigationManager { get; set; }
@@ -14,23 +14,12 @@ namespace Blazor.Pages.MisProductos
 
         Producto prod = new Producto();
 
-        [Parameter] public string Codigo { get; set; }
-
         string imgUrl = string.Empty;
-
-        protected override async Task OnInitializedAsync()
-        {
-            if (!string.IsNullOrEmpty(Codigo))
-            {
-                prod = await productoServicio.GetPorCodigo(Codigo);
-            }
-        }
 
         private async Task SeleccionarImagen(InputFileChangeEventArgs e)
         {
             IBrowserFile imgFile = e.File;
             var buffers = new byte[imgFile.Size];
-            prod.Foto = buffers;
             await imgFile.OpenReadStream().ReadAsync(buffers);
             string imageType = imgFile.ContentType;
             imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
@@ -38,15 +27,28 @@ namespace Blazor.Pages.MisProductos
 
         protected async Task Guardar()
         {
-            if (string.IsNullOrWhiteSpace(prod.Codigo) || string.IsNullOrWhiteSpace(prod.Descripcion))
+            if (string.IsNullOrWhiteSpace(prod.CodigoProducto) || string.IsNullOrWhiteSpace(prod.Descripcion))
             {
                 return;
             }
 
-            bool edito = await productoServicio.Actualizar(prod);
-            if (edito)
+            Producto prodExistente = new Producto();
+
+            prodExistente = await productoServicio.GetPorCodigo(prod.CodigoProducto);
+
+            if (prodExistente != null)
             {
-                await Swal.FireAsync("Atención", "Producto guardado", SweetAlertIcon.Success);
+                if (!string.IsNullOrEmpty(prodExistente.CodigoProducto))
+                {
+                    await Swal.FireAsync("Aviso", "Ya se encuentra un producto registrado con el mismo código", SweetAlertIcon.Warning);
+                    return;
+                }
+            }
+
+            bool inserto = await productoServicio.Nuevo(prod);
+            if (inserto)
+            {
+                await Swal.FireAsync("Atención", "Producto se ha añadido correctamente", SweetAlertIcon.Success);
             }
             else
             {
@@ -58,35 +60,5 @@ namespace Blazor.Pages.MisProductos
         {
             navigationManager.NavigateTo("/Productos");
         }
-
-        protected async Task Eliminar()
-        {
-            bool elimino = false;
-
-            SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
-            {
-                Title = "¿Seguro que desea eliminar el producto?",
-                Icon = SweetAlertIcon.Question,
-                ShowCancelButton = true,
-                ConfirmButtonText = "Aceptar",
-                CancelButtonText = "Cancelar"
-            });
-
-            if (!string.IsNullOrEmpty(result.Value))
-            {
-                elimino = await productoServicio.Eliminar(prod.Codigo);
-
-                if (elimino)
-                {
-                    await Swal.FireAsync("Felicidades", "Producto eliminado", SweetAlertIcon.Success);
-                    navigationManager.NavigateTo("/Productos");
-                }
-                else
-                {
-                    await Swal.FireAsync("Error", "No se pudo eliminar el producto", SweetAlertIcon.Error);
-                }
-            }
-        }
-
     }
 }

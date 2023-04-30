@@ -15,7 +15,7 @@ builder.Services.AddSingleton(cadena);
 
 builder.Services.AddScoped<ILoginServicio, LoginServicio>();
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
-builder.Services.AddScoped<IUsuarioServicio, ProductoServicio>();
+builder.Services.AddScoped<IProductoServicio, ProductoServicio>();
 builder.Services.AddScoped<IFacturaServicio, FacturaServicio>();
 builder.Services.AddScoped<IDetalleFacturaServicio, DetalleFacturaServicio>();
 
