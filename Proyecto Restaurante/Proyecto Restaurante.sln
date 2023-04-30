@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33516.290
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32901.82
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modelos", "Modelos\Modelos.csproj", "{5F90EB12-ED0F-4089-917B-8F1A50C0727B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datos", "Datos\Datos.csproj", "{74E61135-E6FA-4BC8-BE88-E3EEF0B86B26}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor", "Blazor\Blazor.csproj", "{E3DBA2CC-9294-43ED-8534-A5B07C271D4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formularios", "Formularios\Formularios.csproj", "{C2486002-42EB-482C-BF8C-FA2584F21A68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E3DBA2CC-9294-43ED-8534-A5B07C271D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3DBA2CC-9294-43ED-8534-A5B07C271D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3DBA2CC-9294-43ED-8534-A5B07C271D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2486002-42EB-482C-BF8C-FA2584F21A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2486002-42EB-482C-BF8C-FA2584F21A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2486002-42EB-482C-BF8C-FA2584F21A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2486002-42EB-482C-BF8C-FA2584F21A68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
