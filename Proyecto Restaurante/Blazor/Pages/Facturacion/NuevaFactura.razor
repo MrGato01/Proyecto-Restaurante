@@ -7,7 +7,7 @@
 			<div class="rz-card card" style="width:100%">
 				<div class="form-group row">
 					<div class="col-sm-2">
-						<b>Identidad:</b>
+						<b>Identidad del Cliente:</b>
 						<InputText id="Identidad" class="form-control" @bind-Value="factura.Identidad" />
 					</div>
 
@@ -27,7 +27,7 @@
 
 					<div class="col-sm-1">
 						<b>Buscar:</b>
-						<input type="submit" class="btn btn-primary"  value= "Buscar" @onclick="@BuscarProducto" />
+						<input type="submit" class="btn btn-primary" value="Buscar" @onclick="@BuscarProducto" />
 					</div>
 
 					<div class="col-sm-6">
@@ -37,7 +37,7 @@
 
 					<div class="col-sm-2">
 						<b>Cantidad:</b>
-						<InputNumber id="Cantidad" class="form-control" @bind-Value="@cantidad" />
+						<InputNumber id="Cantidad" class="form-control" @bind-Value="@Cantidad" />
 					</div>
 
 					<div class="col-sm-1">
@@ -81,16 +81,16 @@
 				</div>
 
 				<div class="form-group row">
-					<label for="Descuento" class="col-sm-10 col-form-label">Descuento</label>
+					<label for="ISV" class="col-sm-10 col-form-label">Impuesto</label>
 					<div class="col-md-2">
-						<InputNumber id="Descuento" TValue="Decimal" class="form-control" @bind-value="factura.Descuento" ValueExpression="@( () => factura.Descuento )" />
+						<InputNumber readonly id="ISV" TValue="Decimal" class="form-control" @bind-value="factura.ISV" ValueExpression="@( () => factura.ISV )" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="ISV" class="col-sm-10 col-form-label">Impuesto</label>
+					<label for="Descuento" class="col-sm-10 col-form-label">Descuento</label>
 					<div class="col-md-2">
-						<InputNumber readonly id="ISV" TValue="Decimal" class="form-control" @bind-value="factura.ISV" ValueExpression="@( () => factura.ISV )" />
+						<InputNumber id="Descuento" TValue="Decimal" class="form-control" @bind-value="factura.Descuento" ValueExpression="@( () => factura.Descuento )" />
 					</div>
 				</div>
 

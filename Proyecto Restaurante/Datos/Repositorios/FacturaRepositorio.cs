@@ -11,7 +11,7 @@ namespace Datos.Repositorios
 
         public FacturaRepositorio(string _cadenaConexion)
         {
-            CadenaConexion = _cadenaConexion;
+			CadenaConexion = _cadenaConexion;
         }
 
         private MySqlConnection Conexion()
@@ -19,17 +19,16 @@ namespace Datos.Repositorios
             return new MySqlConnection(CadenaConexion);
         }
 
-        public async Task<int> Nueva (Factura factura)
+        public async Task<int> Nueva(Factura factura)
         {
-            int idFactura = 0;
+			int idFactura = 0;
             try
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"INSERT INTO factura (IdFactura, Identidad, Fecha, SubTotal, ISV, Descuento, Total) 
-                               VALUES (@IdFactura,@Identidad, @Fecha, @SubTotal, @ISV, @Descuento, @Total); SELECT LAST_INSERT_ID()";
-                idFactura = Convert.ToInt32(await conexion.ExecuteScalarAsync(sql, factura));
-            }
+                string sql = "INSERT INTO factura (Fecha, Identidad, CodigoUsuario, SubTotal, ISV, Descuento, Total) VALUES (@Fecha, @Identidad, @CodigoUsuario, @SubTotal, @ISV, @Descuento, @Total); SELECT LAST_INSERT_ID()";
+				idFactura = Convert.ToInt32(await conexion.ExecuteScalarAsync(sql, factura));
+			}
             catch (Exception ex)
             {
             }
