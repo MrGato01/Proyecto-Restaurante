@@ -20,9 +20,13 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>identidad</th>
+						<th>Identidad</th>
 						<th>Nombre</th>
-						
+						<th>Dirección</th>
+						<th>FechaNacimiento</th>
+						<th>Correo</th>
+						<th>Teléfono</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +35,10 @@
 						<tr>
 							<th>@prod.Identidad</th>
 							<th>@prod.Nombre</th>
+							<th>@prod.Dirección</th>
+							<th>@prod.FechaNacimiento</th>
+							<th>@prod.Correo</th>
+							<th>@prod.Teléfono</th>
 							
 							<th><a class="btn btn-success" href="@($"/Cliente/Editar/{prod.Identidad}")">Editar</a></th>
 						</tr>
