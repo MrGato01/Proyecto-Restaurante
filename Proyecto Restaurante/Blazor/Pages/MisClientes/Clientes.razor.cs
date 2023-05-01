@@ -1,18 +1,19 @@
 ﻿using Blazor.Interfaces;
+using Blazor.Servicios;
 using Microsoft.AspNetCore.Components;
 using Modelos;
 
-namespace Blazor.Pages.MisUsuarios
+namespace Blazor.Pages.MisClientes
 {
-    public partial class Clientes
-    {
-        [Inject] private IClienteServicio ClientesServicio { get; set; }
+	public partial class Clientes
+	{
+		[Inject] private IClienteServicio ClienteServicio { get; set; }
 
-        private IEnumerable<Cliente> lista { get; set; }
+		private IEnumerable<Cliente> listaClientes { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            lista = await ClienteServicio.GetListaAsync();
-        }
-    }
+		protected override async Task OnInitializedAsync()
+		{
+			listaClientes = await ClienteServicio.GetLista();
+		}
+	}
 }

@@ -9,36 +9,36 @@ namespace Blazor.Servicios
     {
 
         private readonly Config _config;
-        private IClientesRepositorio clientesRepositorio;
+        private IClienteRepositorio clienteRepositorio;
 
         public ClienteServicio(Config config)
         {
             _config = config;
-            clientesRepositorio = new ClientesRepositorio(config.CadenaConexion);
+            clienteRepositorio = new ClienteRepositorio(config.CadenaConexion);
         }
-        public async Task<bool> Actualizar(Clientes cliente)
+        public async Task<bool> Actualizar(Cliente cliente)
         {
-            return await clientesRepositorio.Actualizar(cliente);
-        }
-
-        public async Task<bool> Eliminar(string DNIcliente)
-        {
-            return await clientesRepositorio.Eliminar(DNIcliente);
+            return await clienteRepositorio.Actualizar(cliente);
         }
 
-        public async Task<IEnumerable<Clientes>> GetLista()
+        public async Task<bool> Eliminar(string identidad)
         {
-            return await clientesRepositorio.GetLista();
+            return await clienteRepositorio.Eliminar(identidad);
         }
 
-        public async Task<Clientes> GetPorCodigo(string DNIcliente)
+        public async Task<IEnumerable<Cliente>> GetLista()
         {
-            return await clientesRepositorio.GetPorCodigo(DNIcliente);
+            return await clienteRepositorio.GetLista();
         }
 
-        public async Task<bool> Nuevo(Clientes cliente)
+        public async Task<Cliente> GetPorIdentidad(string identidad)
         {
-            return await clientesRepositorio.Nuevo(cliente);
+            return await clienteRepositorio.GetPorIdentidad(identidad);
+        }
+
+        public async Task<bool> Nuevo(Cliente cliente)
+        {
+            return await clienteRepositorio.Nuevo(cliente);
         }
     }
 }

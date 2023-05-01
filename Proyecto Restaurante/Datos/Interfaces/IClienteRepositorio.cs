@@ -1,8 +1,8 @@
 ﻿using Modelos;
 
-namespace Blazor.Interfaces
+namespace Datos.Interfaces
 {
-    public interface IClienteServicio
+    public interface IClienteRepositorio
     {
         Task<bool> Nuevo(Cliente cliente);
         Task<bool> Actualizar(Cliente cliente);

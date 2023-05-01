@@ -5,11 +5,11 @@ using MySql.Data.MySqlClient;
 
 namespace Datos.Repositorios
 {
-    public class ClientesRepositorio : IClientesRepositorio
+    public class ClienteRepositorio : IClienteRepositorio
     {
         private string CadenaConexion;
 
-        public ClientesRepositorio(string _cadenaConexion)
+        public ClienteRepositorio(string _cadenaConexion)
         {
             CadenaConexion = _cadenaConexion;
         }
@@ -20,7 +20,7 @@ namespace Datos.Repositorios
         }
 
 
-        public async Task<bool> Actualizar(Clientes cliente)
+        public async Task<bool> Actualizar(Cliente cliente)
         {
             bool resultado = false;
 
@@ -40,7 +40,7 @@ namespace Datos.Repositorios
             return resultado;
         }
 
-        public async Task<bool> Eliminar(string DNIcliente)
+        public async Task<bool> Eliminar(string identidad)
         {
             bool resultado = false;
             try
@@ -48,7 +48,7 @@ namespace Datos.Repositorios
                 using MySqlConnection _conexion = Conexion();
                 await _conexion.OpenAsync();
                 string sql = "DELETE FROM cliente WHERE Identidad = @Identidad;";
-                resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, new { DNIcliente }));
+                resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, new { identidad }));
             }
 
             catch (Exception)
@@ -58,15 +58,15 @@ namespace Datos.Repositorios
             return resultado;
         }
 
-        public async Task<IEnumerable<Clientes>> GetLista()
+        public async Task<IEnumerable<Cliente>> GetLista()
         {
-            IEnumerable<Clientes> lista = new List<Clientes>();
+            IEnumerable<Cliente> lista = new List<Cliente>();
             try
             {
                 using MySqlConnection _conexion = Conexion();
                 await _conexion.OpenAsync();
                 string sql = "SELECT * FROM cliente;";
-                lista = await _conexion.QueryAsync<Clientes>(sql);
+                lista = await _conexion.QueryAsync<Cliente>(sql);
             }
 
             catch (Exception)
@@ -76,15 +76,15 @@ namespace Datos.Repositorios
             return lista;
         }
 
-        public async Task<Clientes> GetPorCodigo(string DNIcliente)
+        public async Task<Cliente> GetPorIdentidad(string identidad)
         {
-            Clientes client = new Clientes();
+            Cliente client = new Cliente();
             try
             {
                 using MySqlConnection _conexion = Conexion();
                 await _conexion.OpenAsync();
                 string sql = "SELECT * FROM cliente WHERE Identidad = @Identidad;";
-                client = await _conexion.QueryFirstAsync<Clientes>(sql, new { DNIcliente });
+                client = await _conexion.QueryFirstAsync<Cliente>(sql, new { identidad });
             }
 
             catch (Exception)
@@ -94,15 +94,15 @@ namespace Datos.Repositorios
             return client;
         }
 
-        public async Task<bool> Nuevo(Clientes cliente)
+        public async Task<bool> Nuevo(Cliente cliente)
         {
             bool resultado = false;
             try
             {
                 using MySqlConnection _conexion = Conexion();
                 await _conexion.OpenAsync();
-                string sql = @"INSERT INTO cliente (Nombre, Direccion, FechaNacimiento, Correo, Telefono)
-                              VALUES (@Nombre, @Direccion, @FechaNacimiento, @Correo, @Telefono) ";
+                string sql = @"INSERT INTO cliente (Identidad, Nombre, Direccion, FechaNacimiento, Correo, Telefono)
+                              VALUES (@Identidad, @Nombre, @Direccion, @FechaNacimiento, @Correo, @Telefono) ";
                 resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, cliente));
             }
 

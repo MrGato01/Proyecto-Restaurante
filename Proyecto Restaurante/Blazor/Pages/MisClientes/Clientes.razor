@@ -1,5 +1,6 @@
 ﻿@page "/Clientes"
 @using Modelos
+
 <AuthorizeView Roles="Administrador">
 	<Authorized Context="AuthenticationState">
 		<h2>Lista de Clientes</h2>
@@ -28,10 +29,10 @@
 					@foreach (Cliente prod in listaClientes)
 					{
 						<tr>
-							<th>@prod.identidadCliente</th>
+							<th>@prod.Identidad</th>
 							<th>@prod.Nombre</th>
 							
-							<th><a class="btn btn-success" href="@($"/Cliente/Editar/{prod.identidadCliente}")">Editar</a></th>
+							<th><a class="btn btn-success" href="@($"/Cliente/Editar/{prod.Identidad}")">Editar</a></th>
 						</tr>
 
 					}

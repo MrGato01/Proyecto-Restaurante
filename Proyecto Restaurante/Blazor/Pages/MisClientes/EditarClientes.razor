@@ -1,4 +1,4 @@
-﻿@page "/Cliente/Editar/{identidadCliente}"
+﻿@page "/Cliente/Editar/{Identidad}"
 
 <AuthorizeView Roles="Administrador">
     <Authorized Context="AuthenticationState">
@@ -6,16 +6,16 @@
         <h2>Editar Cliente</h2>
         <br />
 
-        <EditForm Model="@clien">
+        <EditForm Model="@cliente">
             <DataAnnotationsValidator />
 
             <div class=" form-group row">
-                <label for="identidadCliente" class="col-sm-2 col-form-label">
-                    identidadCliente
+                <label for="Identidad" class="col-sm-2 col-form-label">
+                    Identidad
                 </label>
                 <div class="col-sm-10">
-                    <label for="identidadCliente" class="col-sm-2 col-form-label">
-                        @clien.identidadCliente
+                    <label for="Identidad" class="col-sm-2 col-form-label">
+                        @cliente.Identidad
                     </label>
                 </div>
             </div>
@@ -25,9 +25,9 @@
                     Nombre
                 </label>
                 <div class="col-sm-10">
-                    <InputText id="Nombre" class="form-control" @bind-Value="clien.Nombre" />
+                    <InputText id="Nombre" class="form-control" @bind-Value="cliente.Nombre" />
 
-                    <ValidationMessage For="@(() => clien.Nombre)" />
+                    <ValidationMessage For="@(() => cliente.Nombre)" />
                 </div>
             </div>         
 

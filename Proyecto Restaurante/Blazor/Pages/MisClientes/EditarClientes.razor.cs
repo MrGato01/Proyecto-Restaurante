@@ -1,70 +1,58 @@
 ﻿using Blazor.Interfaces;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Modelos;
 
 namespace Blazor.Pages.MisClientes
 {
     public partial class EditarClientes
     {
-        [Inject] private IClienteServicio ClienteServicio { get; set; }
+        [Inject] private IClienteServicio clienteServicio { get; set; }
         [Inject] private NavigationManager navigationManager { get; set; }
         [Inject] private SweetAlertService Swal { get; set; }
 
-        private Cliente user = new Cliente();
-        [Parameter] public string CodigoCliente { get; set; }
-        string imgUrl = string.Empty;
+        private Cliente cliente = new Cliente();
+        [Parameter] public string Identidad { get; set; }
 
 
         protected override async Task OnInitializedAsync()
         {
-            if (!string.IsNullOrEmpty(CodigoUsuario))
+            if (!string.IsNullOrEmpty(Identidad))
             {
-                user = await ClienteServicio.GetPorCodigoAsync(CodigoCliente);
+				cliente = await clienteServicio.GetPorIdentidad(Identidad);
             }
         }
 
-        private async Task SeleccionarImagen(InputFileChangeEventArgs e)
-        {
-            IBrowserFile imgFile = e.File;
-            var buffers = new byte[imgFile.Size];
-            user.Foto = buffers;
-            await imgFile.OpenReadStream().ReadAsync(buffers);
-            string imageType = imgFile.ContentType;
-            imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
-        }
 
 
         protected async void Guardar()
         {
-            if (string.IsNullOrWhiteSpace(user.CodigoCliente) || string.IsNullOrWhiteSpace(user.Nombre) ||
-                string.IsNullOrWhiteSpace(user.Contrasena) || string.IsNullOrWhiteSpace(user.Rol) || user.Rol == "Seleccionar")
+            if (string.IsNullOrWhiteSpace(cliente.Identidad) || string.IsNullOrWhiteSpace(cliente.Nombre))
             {
                 return;
             }
 
-            bool edito = await ClienteServicio.ActualizarAsync(user);
+            bool edito = await clienteServicio.Actualizar(cliente);
 
             if (edito)
             {
-                await Swal.FireAsync("Felicidades", "Cliente se actualizo correctamente", SweetAlertIcon.Success);
+                await Swal.FireAsync("Felicidades", "El cliente se actualizo correctamente", SweetAlertIcon.Success);
             }
             else
             {
-                await Swal.FireAsync("Error", "No se pudo actualizar el cliente", SweetAlertIcon.Error);
+                await Swal.FireAsync("Error", "No se pudo actualizar el cliente de forma correcta", SweetAlertIcon.Error);
             }
         }
 
         protected async void Cancelar()
         {
-            navigationManager.NavigateTo("/Usuarios");
+            navigationManager.NavigateTo("/Clientes");
         }
         protected async void Eliminar()
         {
             SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
             {
-                Title = "¿Estas Seguro que deseas eliminar el usuario?",
+                Title = "¿Estas Seguro que deseas eliminar al cliente?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true,
                 ConfirmButtonText = "Aceptar",
@@ -73,24 +61,18 @@ namespace Blazor.Pages.MisClientes
 
             if (!string.IsNullOrEmpty(result.Value))
             {
-                bool elimino = await ClienteServicio.EliminarAsync(user.CodigoCliente);
+                bool elimino = await clienteServicio.Eliminar(cliente.Identidad);
 
                 if (elimino)
                 {
-                    await Swal.FireAsync("Felicidades", "Usuario eliminado correctamente", SweetAlertIcon.Success);
+                    await Swal.FireAsync("Felicidades", "El cliente ha sido eliminado correctamente", SweetAlertIcon.Success);
                     navigationManager.NavigateTo("/Clientes");
                 }
                 else
                 {
-                    await Swal.FireAsync("Error", "No se pudo eliminar el cliente", SweetAlertIcon.Error);
+                    await Swal.FireAsync("Error", "No se pudo eliminar al cliente", SweetAlertIcon.Error);
                 }
             }
         }
     }
-}
-enum Roles
-{
-    Seleccionar,
-    Administrador,
-    Usuario
 }

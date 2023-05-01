@@ -1,7 +1,6 @@
 ﻿using Blazor.Interfaces;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Modelos;
 
 namespace Blazor.Pages.MisClientes
@@ -9,42 +8,32 @@ namespace Blazor.Pages.MisClientes
     public partial class NuevoCliente
     {
 
-        [Inject] private IClienteServicio ClienteServicio { get; set; }
+        [Inject] private IClienteServicio clienteServicio { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private SweetAlertService Swal { get; set; }
-        private Usuario user = new Usuario();
-        [Parameter] public string CodigoCliente { get; set; }
-        string imgUrl = string.Empty;
+        private Cliente cliente = new Cliente();
+        [Parameter] public string Identidad { get; set; }
 
 
-        private async Task SeleccionarImagen(InputFileChangeEventArgs e)
-        {
-            IBrowserFile imgFile = e.File;
-            var buffers = new byte[imgFile.Size];
-            user.Foto = buffers;
-            await imgFile.OpenReadStream().ReadAsync(buffers);
-            string imageType = imgFile.ContentType;
-            imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
-        }
+       
 
         protected async void Guardar()
         {
-            if (string.IsNullOrWhiteSpace(user.CodigoCliente) || string.IsNullOrWhiteSpace(user.Nombre) ||
-                string.IsNullOrWhiteSpace(user.Contrasena) || string.IsNullOrWhiteSpace(user.Rol) || user.Rol == "Seleccionar")
+            if (string.IsNullOrWhiteSpace(cliente.Identidad) || string.IsNullOrWhiteSpace(cliente.Nombre))
             {
                 return;
             }
-            user.FechaCreacion = DateTime.Now;
+			cliente.FechaNacimiento = DateTime.Now;
 
-            bool inserto = await ClienteServicio.NuevoAsync(user);
+            bool inserto = await clienteServicio.Nuevo(cliente);
 
             if (inserto)
             {
-                await Swal.FireAsync("Felicidades", "Cliente Guardado", SweetAlertIcon.Success);
+                await Swal.FireAsync("Felicidades", "Cliente Guardado satisfactoriamente", SweetAlertIcon.Success);
             }
             else
             {
-                await Swal.FireAsync("Error", "No se pudo Guardar el cliente", SweetAlertIcon.Error);
+                await Swal.FireAsync("Error", "No se pudo Guardar el cliente de forma excitosa", SweetAlertIcon.Error);
             }
         }
 

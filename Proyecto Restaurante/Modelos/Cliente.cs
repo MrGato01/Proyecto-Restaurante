@@ -2,14 +2,13 @@
 
 namespace Modelos
 {
-    public class Clientes
+    public class Cliente
     {
 
         [Required(ErrorMessage = "EL número de identidad es necesario")]
         public string Identidad { get; set; }
         [Required(ErrorMessage = "El nombre es necesario")]
         public string Nombre { get; set; }
-        [Required(ErrorMessage = "El nombre es necesario")]
         public string Direccion { get; set; }
         [Required(ErrorMessage = "La fecha de nacimiento es necesaria")]
         public DateTime FechaNacimiento { get; set; }
@@ -17,7 +16,7 @@ namespace Modelos
         [Required(ErrorMessage = "El número de teléfono es necesario")]
         public string Telefono { get; set; }
 
-        public Clientes(string identidad, string nombre, string direccion, DateTime fechaNacimiento, string correo, string telefono)
+        public Cliente(string identidad, string nombre, string direccion, DateTime fechaNacimiento, string correo, string telefono)
         {
             Identidad = identidad;
             Nombre = nombre;
@@ -27,7 +26,7 @@ namespace Modelos
             Telefono = telefono;
         }
 
-        public Clientes()
+        public Cliente()
         {
         }
     }
