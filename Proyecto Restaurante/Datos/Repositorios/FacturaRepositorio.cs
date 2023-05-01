@@ -26,8 +26,8 @@ namespace Datos.Repositorios
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"INSERT INTO factura (IdFactura, Fecha, Identidad, CodigoUsuario, SubTotal, ISV, Descuento, Total) 
-                               VALUES (@IdFactura, @Fecha, @Identidad, @CodigoUsuario, @SubTotal, @ISV, @Descuento, @Total); SELECT LAST_INSERT_ID()";
+                string sql = @"INSERT INTO factura (IdFactura, Identidad, Fecha, SubTotal, ISV, Descuento, Total) 
+                               VALUES (@IdFactura,@Identidad, @Fecha, @SubTotal, @ISV, @Descuento, @Total); SELECT LAST_INSERT_ID()";
                 idFactura = Convert.ToInt32(await conexion.ExecuteScalarAsync(sql, factura));
             }
             catch (Exception ex)

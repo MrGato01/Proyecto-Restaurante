@@ -20,7 +20,7 @@ namespace Blazor.Pages.Facturacion
         private List<DetalleFactura> listaDetalleFactura = new List<DetalleFactura>();
         private Producto producto = new Producto();
         private int cantidad { get; set; }
-        private string codigoProducto { get; set; }
+        private string CodigoProducto { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -30,9 +30,8 @@ namespace Blazor.Pages.Facturacion
 
         private async void BuscarProducto()
         {
-            producto = await productoServicio.GetPorCodigo(codigoProducto);
-        }
-
+            producto = await productoServicio.GetPorCodigo(CodigoProducto);
+        } 
         protected async Task AgregarProducto(MouseEventArgs args)
         {
             if (args.Detail != 0)
@@ -50,7 +49,7 @@ namespace Blazor.Pages.Facturacion
                     producto.Precio = 0;
                     producto.Existencia = 0;
                     cantidad = 0;
-                    codigoProducto = "0";
+                    CodigoProducto = "0";
 
                     factura.SubTotal = factura.SubTotal + detalle.Total;
                     factura.ISV = factura.SubTotal * 0.15M;
@@ -62,12 +61,12 @@ namespace Blazor.Pages.Facturacion
         protected async Task Guardar()
         {
             factura.CodigoUsuario = httpContextAccessor.HttpContext.User.Identity.Name;
-            int idFactura = await facturaServicio.Nueva(factura);
-            if (idFactura != 0)
+            int IdFactura = await facturaServicio.Nueva(factura);
+            if (IdFactura != 0)
             {
                 foreach (var item in listaDetalleFactura)
                 {
-                    item.IdFactura = idFactura;
+                    item.IdFactura = IdFactura;
                     await detalleFacturaServicio.Nuevo(item);
                 }
                 await Swal.FireAsync("Felicidades", "Factura guardada con exito", SweetAlertIcon.Success);
