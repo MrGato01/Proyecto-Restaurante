@@ -12,6 +12,8 @@ namespace Blazor.Pages.MisProductos
         protected override async Task OnInitializedAsync()
         {
             listaProductos = await productoServicio.GetLista();
+
         }
+
     }
 }

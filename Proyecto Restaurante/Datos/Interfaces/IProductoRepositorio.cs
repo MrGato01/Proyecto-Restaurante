@@ -6,8 +6,8 @@ namespace Datos.Interfaces
     {
         Task<bool> Nuevo(Producto producto);
         Task<bool> Actualizar(Producto producto);
-        Task<bool> Eliminar(string codigoProducto);
+        Task<bool> Eliminar(string CodigoProducto);
         Task<IEnumerable<Producto>> GetLista();
-        Task<Producto> GetPorCodigo(string codigoProducto);
+        Task<Producto> GetPorCodigo(string CodigoProducto);
     }
 }

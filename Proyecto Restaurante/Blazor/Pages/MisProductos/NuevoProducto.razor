@@ -5,7 +5,7 @@
         <h3>Nuevo Producto</h3>
 
         <EditForm Model="@prod">
-            <DataAnnotationsValidator/>
+            <DataAnnotationsValidator />
 
             <div class="form-group row">
                 <label for="CodigoProducto" class="col-sm-2 col-form-label">
@@ -18,8 +18,33 @@
             </div>
 
             <div class="form-group row">
+                <label for="TipoProducto" class="col-sm-2 col-form-label">
+                    Tipo de producto
+                </label>
+                <div class="col-sm-10">
+                    <InputSelect class="form-control" @bind-Value="prod.TipoProducto">
+                        @foreach (var prod in Enum.GetValues(typeof(TipoProducto)))
+                        {
+                            <option value="@prod">@prod</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => prod.TipoProducto)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Nombre" class="col-sm-2 col-form-label">
+                    Nombre
+                </label>
+                <div class="col-sm-10">
+                    <InputText id="Nombre" class="form-control" @bind-Value="prod.Nombre" />
+                    <ValidationMessage For="@(() => prod.Nombre)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="Descripcion" class="col-sm-2 col-form-label">
-                    Descripción
+                    Descripción del producto
                 </label>
                 <div class="col-sm-10">
                     <InputText id="Descripcion" class="form-control" @bind-Value="prod.Descripcion" />
@@ -50,7 +75,7 @@
                     Fecha de vencimiento
                 </label>
                 <div class="col-sm-10">
-                    <InputNumber id="FechaVencimiento" class="form-control" @bind-Value="prod.FechaVencimiento" />
+                    <InputDate id="FechaVencimiento" class="form-control" @bind-Value="prod.FechaVencimiento" />
                 </div>
             </div>
 

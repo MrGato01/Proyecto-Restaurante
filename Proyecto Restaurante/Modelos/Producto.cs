@@ -16,12 +16,12 @@ namespace Modelos
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "La cantidad en existencias es obligatorio")]
-        public decimal Existencia { get; set; }
+        public int Existencia { get; set; }
 
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "La fecha de vencimiento es obligatoria")]
-        public string FechaVencimiento { get; set; }
+        public DateTime FechaVencimiento { get; set; }
         public bool EstaActivo { get; set; }
     }
 }

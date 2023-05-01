@@ -27,7 +27,8 @@ namespace Datos.Repositorios
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
 
-                string sql = @"UPDATE producto SET TipoProducto = @TipoProducto, Nombre = @Nombre, Descripcion = @Descripcion, Existencia = @Existencia, Precio = @Precio, FechaVencimiento = @FechaVencimiento, EstaActivo = @EstaActivo WHERE CodigoProducto=@CodigoProducto;";
+                string sql = @"UPDATE producto SET TipoProducto = @TipoProducto, Nombre = @Nombre, Descripcion = @Descripcion, Existencia = @Existencia, 
+                              Precio = @Precio, FechaVencimiento = @FechaVencimiento, EstaActivo = @EstaActivo WHERE CodigoProducto=@CodigoProducto;";
                 resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, producto));
             }
             catch (Exception)
@@ -72,19 +73,19 @@ namespace Datos.Repositorios
 
         public async Task<Producto> GetPorCodigo(string CodigoProducto)
         {
-            Producto producto = new Producto();
+            Producto prod = new Producto();
             try
             {
-                using MySqlConnection conexion = Conexion();
-                await conexion.OpenAsync();
+                using MySqlConnection _conexion = Conexion();
+                await _conexion.OpenAsync();
 
-                string sql = "SELECT * FROM producto WHERE CodigoProducto = @CodigoProducto";
-                producto = await conexion.QueryFirstAsync<Producto>(sql, new { CodigoProducto });
+                string sql = "SELECT * FROM producto WHERE CodigoProducto = @CodigoProducto;";
+                prod = await _conexion.QueryFirstAsync<Producto>(sql, new { CodigoProducto });
             }
             catch (Exception)
             {
             }
-            return producto;
+            return prod;
         }
 
         public async Task<bool> Nuevo(Producto producto)
@@ -92,11 +93,12 @@ namespace Datos.Repositorios
             bool resultado = false;
             try
             {
-                using MySqlConnection conexion = Conexion();
-                await conexion.OpenAsync();
+                using MySqlConnection _conexion = Conexion();
+                await _conexion.OpenAsync();
 
-                string sql = "INSERT INTO producto (CodigoProducto, TipoProducto, Nombre, Descripcion, Existencia, Precio, FechaVencimiento, EstaActivo) VALUES(@CodigoProducto, @TipoProducto, @Nombre,@Descripcion @Existencia, @Precio,  @FechaVencimiento, @EstaActivo)";
-                resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, producto));
+                string sql = @"INSERT INTO producto (CodigoProducto, TipoProducto, Nombre, Descripcion, Existencia, Precio, FechaVencimiento, EstaActivo) 
+                               VALUES (@CodigoProducto, @TipoProducto, @Nombre, @Descripcion, @Existencia, @Precio, @FechaVencimiento, @EstaActivo);";
+                resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, producto));
             }
             catch (Exception)
             {

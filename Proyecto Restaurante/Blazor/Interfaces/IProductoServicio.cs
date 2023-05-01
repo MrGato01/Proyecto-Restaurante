@@ -6,8 +6,8 @@ namespace Blazor.Interfaces
     {
         Task<bool> Nuevo(Producto producto);
         Task<bool> Actualizar(Producto producto);
-        Task<bool> Eliminar(string codigo);
+        Task<bool> Eliminar(string CodigoProducto);
         Task<IEnumerable<Producto>> GetLista();
-        Task<Producto> GetPorCodigo(string codigo);
+        Task<Producto> GetPorCodigo(string CodigoProducto);
     }
 }

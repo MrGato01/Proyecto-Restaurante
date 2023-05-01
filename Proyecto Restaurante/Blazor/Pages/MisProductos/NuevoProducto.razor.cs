@@ -1,7 +1,6 @@
 ﻿using Blazor.Interfaces;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Modelos;
 
 namespace Blazor.Pages.MisProductos
@@ -14,20 +13,14 @@ namespace Blazor.Pages.MisProductos
 
         Producto prod = new Producto();
 
-        string imgUrl = string.Empty;
-
-        private async Task SeleccionarImagen(InputFileChangeEventArgs e)
+        protected override async Task OnInitializedAsync()
         {
-            IBrowserFile imgFile = e.File;
-            var buffers = new byte[imgFile.Size];
-            await imgFile.OpenReadStream().ReadAsync(buffers);
-            string imageType = imgFile.ContentType;
-            imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+            prod.FechaVencimiento = DateTime.Now;
         }
 
         protected async Task Guardar()
         {
-            if (string.IsNullOrWhiteSpace(prod.CodigoProducto) || string.IsNullOrWhiteSpace(prod.Descripcion))
+            if (string.IsNullOrWhiteSpace(prod.CodigoProducto) || string.IsNullOrWhiteSpace(prod.Nombre))
             {
                 return;
             }
