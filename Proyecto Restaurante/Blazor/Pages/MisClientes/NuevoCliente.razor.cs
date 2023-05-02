@@ -23,7 +23,6 @@ namespace Blazor.Pages.MisClientes
             {
                 return;
             }
-			cliente.FechaNacimiento = DateTime.Now;
 
             bool inserto = await clienteServicio.Nuevo(cliente);
 
